@@ -2,6 +2,7 @@ body {
 	font-family: Arial, Helvetica, sans-serif;
 	background-color: whitesmoke;
 }
+
 .topnav {
 	font-size: 18px;
 	overflow: hidden;
@@ -19,13 +20,13 @@ body {
 	text-decoration: none;
 }
 
-
 .form {
 	display: inline-flex;
 	flex-direction: row;
 	float: right;
 	margin-top: 10px;
 }
+
 .search-field {
 	width: 50%;
 	padding: 8px 35px 8px 15px;
@@ -34,13 +35,7 @@ body {
 	border-radius: 100px;
 	outline: none;
 }
-/* .search-box {
-	float: right;
-	font-size: 16px;
-	color: white;
-	padding: 9px 16px;
-	text-decoration: none;
-} */
+
 .search-button {
 	background: transparent;
 	border: none;
@@ -54,20 +49,38 @@ body {
 	object-fit: cover;
 }
 
-/* .search-box input[type="text"] {
-	height: 26px;
-	font-size: 17px;
-	width: 200px;
-	margin-top: 14px;
-} */
 .opt {
 	position: relative;
 	font-family: Arial;
 	font-size: 16px;
 	color: white;
-	padding: 14px 16px;s
-} 
+	padding: 14px 16px;
+}
 
-.table{
-    ;
+#students {
+	border-collapse: collapse;
+	width: 60%;
+}
+
+#students tr:nth-child(even) {
+	background-color: lightgray;
+}
+
+#students tr:hover {
+	background-color: #ddd;
+}
+
+#students td {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#students th {
+	/* width: 30%; */
+	position: center;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: center;
+	background-color: #333;
+	color: white;
 }
