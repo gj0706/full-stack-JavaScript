@@ -55,6 +55,7 @@ body {
 	font-size: 16px;
 	/* color: white; */
 	padding: 8px 16px;
+	background-color: lightgrey;
 }
 
 .table {
@@ -121,21 +122,18 @@ body {
 	text-decoration: none;
 	margin-top: 0px;
 }
+
+.social-icons {
+	margin-top: 0px;
+}
 #icon-list {
 	text-align: center;
 }
 #icon-list li {
 	display: inline-block;
-	/* padding-left: 10px; */
 	padding-right: 35px;
 }
 .fa {
 	font-size: 15px;
 	color: white;
 }
-
-/* .li-item li {
-	display: inline-block;
-} */
-
-/* s */
