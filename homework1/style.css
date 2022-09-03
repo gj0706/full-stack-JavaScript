@@ -51,13 +51,19 @@ body {
 
 .opt {
 	position: relative;
-	font-family: Arial;
+	/* font-family: Arial; */
 	font-size: 16px;
-	color: white;
-	padding: 14px 16px;
+	/* color: white; */
+	padding: 8px 16px;
+}
+
+.table {
+	text-align: center;
 }
 
 #students {
+	margin-left: auto;
+	margin-right: auto;
 	border-collapse: collapse;
 	width: 60%;
 }
@@ -84,3 +90,52 @@ body {
 	background-color: #333;
 	color: white;
 }
+
+.footer {
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	font-size: 15px;
+	background-color: #333;
+	height: 120px;
+	/* color: whitesmoke; */
+}
+
+.footer-text {
+	text-align: center;
+	padding-top: 14px;
+	padding-bottom: 2px;
+}
+.footer-text a {
+	color: white;
+	/* text-align: center;s */
+	/* padding: 14px; */
+	text-decoration: none;
+}
+
+#copyright-text {
+	color: white;
+	text-align: center;
+	/* padding: 14px; */
+	text-decoration: none;
+	margin-top: 0px;
+}
+#icon-list {
+	text-align: center;
+}
+#icon-list li {
+	display: inline-block;
+	/* padding-left: 10px; */
+	padding-right: 35px;
+}
+.fa {
+	font-size: 15px;
+	color: white;
+}
+
+/* .li-item li {
+	display: inline-block;
+} */
+
+/* s */
