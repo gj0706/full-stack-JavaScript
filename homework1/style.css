@@ -5,10 +5,14 @@ body {
 
 .topnav {
 	font-size: 18px;
-	overflow: hidden;
+	/* overflow: hidden; */
 	background-color: #333;
 	height: 50px;
 	color: whitesmoke;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 
 .topnav a {
@@ -49,8 +53,8 @@ body {
 	object-fit: cover;
 }
 
-.opt {
-	position: relative;
+.opt select {
+	/* position: relative; */
 	/* font-family: Arial; */
 	font-size: 16px;
 	/* color: white; */
@@ -90,6 +94,42 @@ body {
 	text-align: center;
 	background-color: #333;
 	color: white;
+}
+
+.flex-container {
+	height: 300px;
+	display: flex;
+	/* border: 1px solid black; */
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+/* 适配mobile */
+@media (max-width: 640px) {
+	.flex-container {
+		height: 600px;
+		flex-direction: column;
+	}
+	.ele {
+		width: 400px;
+		height: 100px;
+	}
+}
+
+.tech {
+	width: 220px;
+	height: 200px;
+	border: 1px lightgrey;
+	border-radius: 25px;
+	/* border-style: outset; */
+	box-shadow: 5px 5px 10px 5px lightgray;
+	align-items: center;
+	/* margin: 20px; */
+}
+
+.lan {
+	margin-top: 15px;
 }
 
 .footer {
