@@ -59,6 +59,21 @@ const string =
 const expectedReturnString =
 	"perhaps the easiest to understand case for reduce is to return the sum of all the elements in an array";
 
+const newString1 = string
+	.trim()
+	.toLowerCase()
+	.split(/[\s\-]+/)
+	.join(" ");
+
+const newString2 = string
+	.trim()
+	.toLowerCase()
+	.replace(/[\s\-]+/g, " ");
+
+console.log(newString1);
+console.log(newString1 === expectedReturnString);
+console.log(newString2 === expectedReturnString);
+
 /*
 
 Question 3
