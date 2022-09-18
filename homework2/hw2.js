@@ -13,37 +13,71 @@ const itemsObject = [
 /*
 1.1 Given the array, implement a function for generating a new array which doubles the quantity and price in each object.
 */
-const doubleArray = (arr) => {
+
+// method 1: use map() and return a newly updated object for each element in the array
+const doubleArray1 = (arr) => {
 	const doubledArr = arr.map((e) => {
 		return { quantity: e.quantity * 2, price: e.price * 2 };
 	});
 	return doubledArr;
 };
 
-console.log(doubleArray(itemsObject));
+// method 2: use destruction
+const doubleArray2 = (arr) => {
+	const doubledArr = arr.map(({ quantity, price }) => {
+		quantity = quantity * 2;
+		price = price * 2;
+		return { quantity, price };
+	});
+	return doubledArr;
+};
+
+// test
+let doubled1 = doubleArray1(itemsObject);
+let doubled2 = doubleArray2(itemsObject);
+console.log(doubled1);
+console.log(doubled2);
 
 /*
 1.2 Given the array, implement a function for generating a new array which contains item quantity > 2 and price > 300 only.
 */
+
+// use filter() to filter out elements
 const filterArray = (arr) => {
 	const filteredArr = arr.filter((e) => e.quantity > 2 && e.price > 300);
 	return filteredArr;
 };
-console.log(filterArray(itemsObject));
+
+// test
+let filtered = filterArray(itemsObject);
+console.log(filtered);
 
 /*
 1.3 Given the array, implement a function to calculate the total value of the items.
 */
-// const itemTotal = (e) => e.quality * e.price;
 
-const totalValue = (arr) => {
+// method 1: use forEach() to iterate array and acuumulate sum
+const totalValue1 = (arr) => {
 	let sum = 0;
 	arr.forEach((e) => {
 		sum += e.quantity * e.price;
 	});
 	return sum;
 };
-console.log(totalValue(itemsObject));
+
+// method 2: use reduce() 	note: reduce does not change the original array
+const totalValue2 = (arr) => {
+	let reduced = arr.reduce((acc, obj) => {
+		return acc + obj.quantity * obj.price;
+	}, 0);
+	return reduced;
+};
+
+// test
+let total1 = totalValue1(itemsObject);
+let total2 = totalValue2(itemsObject);
+console.log(total1);
+console.log(total2);
 
 /*
 
@@ -59,17 +93,20 @@ const string =
 const expectedReturnString =
 	"perhaps the easiest to understand case for reduce is to return the sum of all the elements in an array";
 
+// method 1: use split() and join()
 const newString1 = string
 	.trim()
 	.toLowerCase()
 	.split(/[\s\-]+/)
 	.join(" ");
 
+// method 2: use replace()
 const newString2 = string
 	.trim()
 	.toLowerCase()
 	.replace(/[\s\-]+/g, " ");
 
+// test
 console.log(newString1);
 console.log(newString1 === expectedReturnString);
 console.log(newString2 === expectedReturnString);
@@ -104,19 +141,6 @@ const expectedReturnArray = [
 	{ uuid: 6, role: "pm", name: null },
 ];
 
-// let indices = [];
-// let duplicated = [];
-// first.forEach((e, i) => {
-// 	second.forEach((d, j) => {
-// 		if (e.uuid === d.uuid) {
-// 			indices.push(i, j);
-// 			duplicated.push({ uuid: e.uuid, role: d.role, name: e.name });
-// 		}
-// 	});
-// });
-// console.log(indices);
-// console.log(duplicated);
-
 const mergeArray = (first, second) => {
 	// 1. find the indices of objects in the two arrays that share the same uuid, merge the objects and get a new object
 	let indices = [];
@@ -135,7 +159,7 @@ const mergeArray = (first, second) => {
 	let secondFiltered = second.filter((e) => e.uuid !== second[indices[1]].uuid);
 	let merged = [...firstFiltered, ...secondFiltered];
 
-	// check if each object has a certain property, if it doesn't, create one with null value
+	// 3. check if each object has a certain property, if it doesn't, create one with null value
 	merged.map((e) => {
 		if (e.hasOwnProperty("role") === false) {
 			e.role = null;
@@ -145,11 +169,12 @@ const mergeArray = (first, second) => {
 		}
 	});
 
-	// append the duplicated object to the final array, and sort by uuid
+	// 4. append the duplicated object to the final array, and sort by uuid
 	let final = [...merged, ...duplicated];
 	final.sort((a, b) => a.uuid - b.uuid);
 	return final;
 };
 
+// test
 let merged = mergeArray(first, second);
 console.log(merged);
