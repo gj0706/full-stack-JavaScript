@@ -104,8 +104,8 @@ const expectedReturnArray = [
 	{ uuid: 6, role: "pm", name: null },
 ];
 
-let indices = [];
-let duplicated = [];
+// let indices = [];
+// let duplicated = [];
 // first.forEach((e, i) => {
 // 	second.forEach((d, j) => {
 // 		if (e.uuid === d.uuid) {
@@ -117,7 +117,8 @@ let duplicated = [];
 // console.log(indices);
 // console.log(duplicated);
 
-const mergedArray = (first, second) => {
+const mergeArray = (first, second) => {
+	// 1. find the indices of objects in the two arrays that share the same uuid, merge the objects and get a new object
 	let indices = [];
 	let duplicated = [];
 	first.forEach((e, i) => {
@@ -129,10 +130,12 @@ const mergedArray = (first, second) => {
 		});
 	});
 
+	// 2. filter out the duplicated objects, merge the rest of the two arrays
 	let firstFiltered = first.filter((e) => e.uuid !== first[indices[0]].uuid);
 	let secondFiltered = second.filter((e) => e.uuid !== second[indices[1]].uuid);
-	let merged = [...firstFiltered, ...secondFiltered, ...duplicated];
-	console.log(merged);
+	let merged = [...firstFiltered, ...secondFiltered];
+
+	// check if each object has a certain property, if it doesn't, create one with null value
 	merged.map((e) => {
 		if (e.hasOwnProperty("role") === false) {
 			e.role = null;
@@ -140,44 +143,13 @@ const mergedArray = (first, second) => {
 		if (e.hasOwnProperty("name") === false) {
 			e.name = null;
 		}
-		// let newArray = { uuid: e.uuid, role: e.role, name: e.name };
-		merged.sort((a, b) => a.uuid - b.uuid);
-		// return merged;
 	});
-	return merged;
+
+	// append the duplicated object to the final array, and sort by uuid
+	let final = [...merged, ...duplicated];
+	final.sort((a, b) => a.uuid - b.uuid);
+	return final;
 };
 
-// let firstFiltered = first.filter((e) => e.uuid !== first[indices[0]].uuid);
-// let secondFiltered = second.filter((e) => e.uuid !== second[indices[1]].uuid);
-// let merged = [...firstFiltered, ...secondFiltered];
-console.log(mergedArray(first, second));
-// const arr1 = first.map((e) => {
-// 	// return { uuid: e.uuid, name: e.name, role: null };
-// 	if (e.hasOwnProperty("role") === false) {
-// 		e.role = null;
-// 	}
-// 	if (e.hasOwnProperty("name") === false) {
-// 		e.name = null;
-// 	}
-// 	return { uuid: e.uuid, role: e.role, name: e.name };
-// });
-// // console.log(arr1);
-
-// const arr2 = second.map((e) => {
-// 	if (e.hasOwnProperty("name") === false) {
-// 		e.name = null;
-// 	}
-// 	if (e.hasOwnProperty("role") === false) {
-// 		e.role = null;
-// 	}
-// 	return { uuid: e.uuid, role: e.role, name: e.name };
-// });
-// console.log(arr2);
-// const mergedArray = [...arr1, ...arr2];
-// console.log(mergedArray);
-
-// const merged = first.map((item) => Object.assign({}, item, second[i]));
-// console.log(merged);
-
-// let merged = [...first, ...second];
-// console.log(merged);
+let merged = mergeArray(first, second);
+console.log(merged);
