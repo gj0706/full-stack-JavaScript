@@ -37,45 +37,37 @@ const tableInfo = {
 };
 
 const generateTable = (data) => {
-	const table = document.querySelector("#table2");
+	const table = document.querySelector("#table");
+	const tHead = document.createElement("thead");
+	const tr = document.createElement("tr");
 
-	// create table header
-	let tHead = "";
+	// create the table header
 	for (let i = 0; i < data.tableHeader.length; i++) {
-		let headerRow = `
-        <th>${data.tableHeader[i]}</th>
-      `;
-		tHead += headerRow;
+		const th = document.createElement("th");
+		th.textContent = `${data.tableHeader[i]}`;
+		tr.appendChild(th);
 	}
-	tHead = `
-    <thead>
-      <tr>
-        ${tHead}
-      </tr>
-    </thead>`;
-	console.log(tHead);
-	// create table body
-	let tBody = "";
+
+	tHead.appendChild(tr);
+	console.log(tHead.innerHTML);
+
+	// create the table body
+	const tBody = document.createElement("tbody");
 	for (let i = 0; i < data.tableContent.length; i++) {
+		const tr = document.createElement("tr");
 		let bodyRows = `
-      <tr>
-        <td>${data.tableContent[i]["Student Name"]}</td>
-        <td>${data.tableContent[i].Age}</td>
-        <td>${data.tableContent[i].Phone}</td>
-        <td>${data.tableContent[i].Address}</td>
-      </tr>`;
-		tBody += bodyRows;
+				<td>${data.tableContent[i]["Student Name"]}</td>
+				<td>${data.tableContent[i].Age}</td>
+				<td>${data.tableContent[i].Phone}</td>
+				<td>${data.tableContent[i].Address}</td>`;
+
+		tr.innerHTML = bodyRows;
+		tBody.appendChild(tr);
 	}
-	tBody = `
-    <tbody>
-      ${tBody}
-    </tbody>`;
-	console.log("tbody:" + tBody);
-	table.innerHTML = `
-    ${tHead}
-    ${tBody}
-  `;
-	console.log(table.innerHTML);
+
+	// add table head and body to the table container
+	table.appendChild(tHead);
+	tHead.after(tBody);
 };
 
 generateTable(tableInfo);
@@ -88,6 +80,37 @@ Given the array and generate order list and unordered list dynamically as follow
 */
 
 const list = ["HTML", "JavaScript", "CSS", "React", "Redux", "Java"];
+
+// function to create an ordered list
+const createOrderedList = (data) => {
+	const ol = document.createElement("ol");
+	for (let i = 0; i < list.length; i++) {
+		const li = document.createElement("li");
+		li.className = "lan";
+		li.textContent = list[i];
+		ol.appendChild(li);
+	}
+	const container = document.querySelector("#ordered");
+	console.log("ol:" + ol.innerHTML);
+	container.appendChild(ol);
+};
+
+// function to create an unordered list
+const createUnorderedList = (data) => {
+	const ul = document.createElement("ul");
+	for (let i = 0; i < list.length; i++) {
+		const li = document.createElement("li");
+		li.className = "lan";
+		li.textContent = list[i];
+		ul.appendChild(li);
+	}
+	const container = document.querySelector("#unordered");
+	console.log("ul:" + ul.innerHTML);
+	container.appendChild(ul);
+};
+
+createOrderedList(list);
+createUnorderedList(list);
 
 /*
 
@@ -105,3 +128,20 @@ const dropDownList = [
 	{ value: "dalyCity", content: "Daly City" },
 	{ value: "sanJose", content: "San Jose" },
 ];
+
+const createDropdownList = (data) => {
+	const select = document.createElement("select");
+	for (let i = 0; i < dropDownList.length; i++) {
+		const option = document.createElement("option");
+		option.value = dropDownList[i].value;
+		option.textContent = `${dropDownList[i].content}`;
+		select.appendChild(option);
+	}
+
+	let container = document.querySelector(".opt");
+	let sibling = container.children[0];
+	sibling.after(select);
+	console.log(container);
+};
+
+createDropdownList(dropDownList);

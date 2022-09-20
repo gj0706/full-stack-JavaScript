@@ -67,27 +67,27 @@ body {
 	text-align: center;
 }
 
-#students {
+/* #students {
 	margin-left: auto;
 	margin-right: auto;
 	border-collapse: collapse;
 	width: 60%;
-}
+} */
 
-#students tr:nth-child(even) {
+#table tr:nth-child(even) {
 	background-color: lightgray;
 }
 
-#students tr:hover {
+#table tr:hover {
 	background-color: #ddd;
 }
 
-#students td {
+#table td {
 	border: 1px solid #ddd;
 	padding: 8px;
 }
 
-#students th {
+#table th {
 	/* width: 30%; */
 	position: center;
 	padding-top: 12px;
@@ -95,6 +95,13 @@ body {
 	text-align: center;
 	background-color: #333;
 	color: white;
+}
+
+#table {
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	width: 60%;
 }
 
 .flex-container {
@@ -130,7 +137,7 @@ body {
 }
 
 .lan {
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 .footer {
