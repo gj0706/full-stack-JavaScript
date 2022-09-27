@@ -42,32 +42,39 @@ const generateTable = (data) => {
 	const tr = document.createElement("tr");
 
 	// create the table header
-	for (let i = 0; i < data.tableHeader.length; i++) {
-		const th = document.createElement("th");
-		th.textContent = `${data.tableHeader[i]}`;
-		tr.appendChild(th);
-	}
-
-	tHead.appendChild(tr);
-	console.log(tHead.innerHTML);
+	const header = data.tableHeader.map((ele) => {
+		// 这里返回的是一个<th>Student name</th>... 的node array
+		let th = document.createElement("th");
+		th.textContent = ele;
+		return th;
+	});
+	tr.append(...header);
+	tHead.append(tr);
 
 	// create the table body
+	const createTds = (ele) => {
+		let td = document.createElement("td");
+		td.textContent = ele;
+		return td;
+	};
 	const tBody = document.createElement("tbody");
-	for (let i = 0; i < data.tableContent.length; i++) {
-		const tr = document.createElement("tr");
-		let bodyRows = `
-				<td>${data.tableContent[i]["Student Name"]}</td>
-				<td>${data.tableContent[i].Age}</td>
-				<td>${data.tableContent[i].Phone}</td>
-				<td>${data.tableContent[i].Address}</td>`;
+	const tRow = data.tableContent.map((ele) => {
+		// rRow is a node list
+		let tr = document.createElement("tr");
+		let tdData = Object.values(ele);
+		let tds = tdData.map((d) => {
+			let td = createTds(d);
+			return td;
+		});
+		tr.append(...tds);
+		return tr;
+	});
 
-		tr.innerHTML = bodyRows;
-		tBody.appendChild(tr);
-	}
+	tBody.append(...tRow);
 
 	// add table head and body to the table container
-	table.appendChild(tHead);
-	tHead.after(tBody);
+	table.append(tHead);
+	table.append(tBody);
 };
 
 generateTable(tableInfo);
@@ -81,36 +88,50 @@ Given the array and generate order list and unordered list dynamically as follow
 
 const list = ["HTML", "JavaScript", "CSS", "React", "Redux", "Java"];
 
-// function to create an ordered list
-const createOrderedList = (data) => {
-	const ol = document.createElement("ol");
-	for (let i = 0; i < list.length; i++) {
+// function to create ordered and unorderedlist
+const createList = (data, type, id) => {
+	const lst = document.createElement(type);
+	const liList = data.map((ele) => {
 		const li = document.createElement("li");
 		li.className = "lan";
-		li.textContent = list[i];
-		ol.appendChild(li);
-	}
-	const container = document.querySelector("#ordered");
-	console.log("ol:" + ol.innerHTML);
-	container.appendChild(ol);
+		li.textContent = ele;
+		return li;
+	});
+	lst.append(...liList);
+	const container = document.querySelector("#" + id);
+	container.append(lst);
 };
+createList(list, "ol", "ordered");
+createList(list, "ul", "unordered");
+// const createOrderedList = (data) => {
+// 	const ol = document.createElement("ol");
+// 	for (let i = 0; i < list.length; i++) {
+// 		const li = document.createElement("li");
+// 		li.className = "lan";
+// 		li.textContent = list[i];
+// 		ol.appendChild(li);
+// 	}
+// 	const container = document.querySelector("#ordered");
+// 	console.log("ol:" + ol.innerHTML);
+// 	container.appendChild(ol);
+// };
 
-// function to create an unordered list
-const createUnorderedList = (data) => {
-	const ul = document.createElement("ul");
-	for (let i = 0; i < list.length; i++) {
-		const li = document.createElement("li");
-		li.className = "lan";
-		li.textContent = list[i];
-		ul.appendChild(li);
-	}
-	const container = document.querySelector("#unordered");
-	console.log("ul:" + ul.innerHTML);
-	container.appendChild(ul);
-};
+// // function to create an unordered list
+// const createUnorderedList = (data) => {
+// 	const ul = document.createElement("ul");
+// 	for (let i = 0; i < list.length; i++) {
+// 		const li = document.createElement("li");
+// 		li.className = "lan";
+// 		li.textContent = list[i];
+// 		ul.appendChild(li);
+// 	}
+// 	const container = document.querySelector("#unordered");
+// 	console.log("ul:" + ul.innerHTML);
+// 	container.appendChild(ul);
+// };
 
-createOrderedList(list);
-createUnorderedList(list);
+// createOrderedList(list);
+// createUnorderedList(list);
 
 /*
 
@@ -130,18 +151,21 @@ const dropDownList = [
 ];
 
 const createDropdownList = (data) => {
+	const container = document.querySelector(".opt");
 	const select = document.createElement("select");
-	for (let i = 0; i < dropDownList.length; i++) {
+	const dropDownList = data.map(({ value, content }) => {
 		const option = document.createElement("option");
-		option.value = dropDownList[i].value;
-		option.textContent = `${dropDownList[i].content}`;
-		select.appendChild(option);
-	}
-
-	let container = document.querySelector(".opt");
-	let sibling = container.children[0];
-	sibling.after(select);
-	console.log(container);
+		option.value = value;
+		option.textContent = content;
+		return option;
+	});
+	select.append(...dropDownList);
+	container.append(select);
+	// let sibling = container.children[0];
+	// sibling.after(select);
+	// console.log(container);
 };
 
 createDropdownList(dropDownList);
+
+// append(): 把元素一个一个 append到table里, appendChild() 如果只有一个元素就用appendChild()
